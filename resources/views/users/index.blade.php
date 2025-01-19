@@ -15,12 +15,14 @@
     <table>
         <tr>
             <th>User Id</th>
-            <th>Title</th>
-            <th>Post</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
         </tr>
 
         @foreach ($users as $user)
         <tr>
+            <td>{{ $user->id }}</td>
             <td>{{ $user->name }}</td>
             <td>{{ $user->email }}</td>
             <td>{{ $user->password }}</td>
@@ -31,27 +33,11 @@
                             @method('DELETE')
                         <button type="submit">Delete</button>
             </td>
-
-            @foreach ($users->post as $post)
-                <td>{{ $post->title }}</td>
-                <td>{{ $post->body }}</td>
-                <td>
-                    <button><a href="{{ route('users.edit', $student->id) }}">Edit</a></button>
-                            <form action="{{ route('users.destroy', $student->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                            <button type="submit">Delete</button>
-                </td>
-            @endforeach
-
         </tr>
         @endforeach
-
-
-
-
-
-        <button>Create Profile</button>
     </table>
+
+    <button><a href="{{ route('posts.index') }}">View Posts</a><button>
+    <button><a href="{{ route('users.create') }}">Create New Profile</a></button>
 </body>
 </html>

@@ -23,7 +23,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            'password' => 'required|min:6|max:12',
         ]);
 
         User::create([
@@ -62,7 +62,7 @@ class UserController extends Controller
             'password' => $request->password ? bcrypt($request->password) : $user->password,
         ]);
 
-        return redirect()->route('users.index')->with('success', 'User updated successfully.');
+        return redirect()->route('users.index', ['id' => $id])->with('success', 'User updated successfully.');
     }
 
     public function destroy($id)
